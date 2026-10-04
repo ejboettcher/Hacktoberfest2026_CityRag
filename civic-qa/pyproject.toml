@@ -1,0 +1,22 @@
+[project]
+name = "civic-qa"
+version = "0.1.0"
+description = "Ask Your City Council: answer questions about public meeting records with a local open model, with page citations."
+license = "Apache-2.0"
+requires-python = ">=3.11"
+dependencies = [
+    "ollama>=0.6", # local model + embeddings (ask.py, ingest.py, trends.py)
+    "pypdf>=6.0", # read text from PDFs (ingest.py, ocr.py)
+    "numpy>=2.0", # vector search index
+    "gradio>=6.0", # resident-facing web UI (app.py)
+    "pandas>=3.0", # 311 / budget / calls-for-service analysis
+    "ocrmypdf>=17.0", # OCR for scanned minutes; also needs Tesseract + Ghostscript installed
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.6",
+]
+
+[tool.uv]
+package = false
