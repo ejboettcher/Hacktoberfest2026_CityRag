@@ -1,0 +1,184 @@
+[
+  {
+    "objectID": "slides.html#what-well-build",
+    "href": "slides.html#what-well-build",
+    "title": "Open Models for Civic Good",
+    "section": "What we’ll build",
+    "text": "What we’ll build\nAn “Ask Your City Council” tool:\n\nAn open-weight model running on your laptop\nAnswers questions about public meeting minutes\nIn plain language, citing the page behind every fact\nSays “I couldn’t find that” instead of guessing\n\nYou need basic Python and Git. No GPU, no ML background, no paid account. ~90 minutes for the core build."
+  },
+  {
+    "objectID": "slides.html#why-open-models-for-civic-work",
+    "href": "slides.html#why-open-models-for-civic-work",
+    "title": "Open Models for Civic Good",
+    "section": "Why open models for civic work?",
+    "text": "Why open models for civic work?\n\n\nPublic data stays under public control. Nothing leaves your machine.\nFree to run. A city, library or nonprofit pays no per-query API bill.\nInspectable. Anyone can read, fork and improve the code, which matters when residents need to trust the answers."
+  },
+  {
+    "objectID": "slides.html#hacktoberfest-2026-changed",
+    "href": "slides.html#hacktoberfest-2026-changed",
+    "title": "Open Models for Civic Good",
+    "section": "Hacktoberfest 2026 changed",
+    "text": "Hacktoberfest 2026 changed\nPull requests no longer count. The theme is building with open-source AI and open-weight models.\n\n\n\n\n\n\n\n\nWay to take part\nWhat it is\nWhat you can earn\n\n\n\n\nHack Day (in person)\nOne-day mini-hackathon: build and demo\nSwag bag for winners, certificate\n\n\nMeetup (in person)\nTalks and workshops on open AI\nCertificate, T-shirts while supplies last\n\n\nDEV Challenges (online)\nWeekend + four weekly AI rounds\nCash prizes, DEV badge\n\n\nMLH livestreams (online)\nLive sessions and challenges\nCount toward the sticker pack\n\n\n\nRun by MLH and DEV with DigitalOcean · hacktoberfest.com/questions\n\nOrganizers dropped PR counting after maintainers reported a flood of low-effort PRs. Sign in at My Hacktoberfest with a MyMLH account; Hack Day projects are submitted the same day through the Fest’s event page."
+  },
+  {
+    "objectID": "slides.html#open-weight-vs.-fully-open",
+    "href": "slides.html#open-weight-vs.-fully-open",
+    "title": "Open Models for Civic Good",
+    "section": "Open-weight vs. fully open",
+    "text": "Open-weight vs. fully open\n\n\nOpen-weight\nYou can download, run and fine-tune the model.\nTraining data stays private.\nGemma, Qwen, Llama\n\nFully open\nData, training code and checkpoints are published too.\nA real answer to “how was this trained?”\nOlmo 3 (Ai2)"
+  },
+  {
+    "objectID": "slides.html#models-to-start-with",
+    "href": "slides.html#models-to-start-with",
+    "title": "Open Models for Civic Good",
+    "section": "Models to start with",
+    "text": "Models to start with\n\n\n\n\n\n\n\n\n\n\nModel\nDownload\nContext\nLicense\nBest for\n\n\n\n\nGemma 4 E2B\n4.6–7.5 GB\n128K\nApache 2.0\nOlder laptops, 8 GB RAM\n\n\nGemma 4 E4B (default)\n6.6–9.5 GB\n128K\nApache 2.0\nMost laptops, 16 GB RAM\n\n\nGemma 4 12B\n7.7–8.0 GB\n256K\nApache 2.0\nBetter answers, 16 GB+\n\n\nGemma 4 26B (MoE, ~4B active)\n16–19 GB\n256K\nApache 2.0\nFast and strong, 32 GB\n\n\nQwen3.6 27B\n18–19 GB\n256K\nApache 2.0\nMultilingual, 24 GB GPU\n\n\nOlmo 3 7B / 32B\nvaries\n65K\nApache 2.0\nFull training transparency\n\n\n\nGemma 4 moved to Apache 2.0 at launch (April 2026). Llama 4’s community license carries restrictions and isn’t OSI-approved: always read the license."
+  },
+  {
+    "objectID": "slides.html#rules-of-thumb-for-hardware",
+    "href": "slides.html#rules-of-thumb-for-hardware",
+    "title": "Open Models for Civic Good",
+    "section": "Rules of thumb for hardware",
+    "text": "Rules of thumb for hardware\n\n\n\n\n\n\n\nYour machine\nRun this\n\n\n\n\n8 GB RAM\ngemma4:e2b (slow but works)\n\n\n16 GB RAM / Apple Silicon\ngemma4:e4b or gemma4:12b\n\n\n24 GB GPU or 32 GB+ unified memory\ngemma4:26b, gemma4:31b, qwen3.6:27b\n\n\nNo usable machine\nOllama -cloud tags, or ask your Fest host"
+  },
+  {
+    "objectID": "slides.html#install-ollama-and-pull-models",
+    "href": "slides.html#install-ollama-and-pull-models",
+    "title": "Open Models for Civic Good",
+    "section": "Install Ollama and pull models",
+    "text": "Install Ollama and pull models\n# macOS / Windows: download from ollama.com/download\n# Linux:\ncurl -fsSL https://ollama.com/install.sh | sh\n\nollama pull gemma4:e4b          # chat model\nollama pull nomic-embed-text    # embedding model, turns text into vectors\n\nollama run gemma4:e4b \"Explain a city council consent agenda in two sentences.\"\nFree, open source, a local API on port 11434."
+  },
+  {
+    "objectID": "slides.html#set-up-the-project-with-uv",
+    "href": "slides.html#set-up-the-project-with-uv",
+    "title": "Open Models for Civic Good",
+    "section": "Set up the project with uv",
+    "text": "Set up the project with uv\nunzip civic-qa.zip && cd civic-qa\nuv sync                       # creates .venv from uv.lock\n# or: pip install -r requirements.txt\n\n\npyproject.toml\n\n[project]\nname = \"civic-qa\"\nrequires-python = \"&gt;=3.11\"\ndependencies = [\n    \"ollama&gt;=0.6\", \"pypdf&gt;=6.0\", \"numpy&gt;=2.0\",\n    \"gradio&gt;=6.0\", \"pandas&gt;=3.0\", \"ocrmypdf&gt;=17.0\",\n]"
+  },
+  {
+    "objectID": "slides.html#how-it-works-rag",
+    "href": "slides.html#how-it-works-rag",
+    "title": "Open Models for Civic Good",
+    "section": "How it works: RAG",
+    "text": "How it works: RAG\n\nOnce MinutesPDF · txt · md → OCRif scanned → Page-taggedchunks → Vectorindex\n\n\nEach question Resident’squestion → Find 5 closestchunks → Model answersONLY from them → Plain answer+ citations\n\nRetrieval-augmented generation: the model answers from the records, not its memory. That’s what makes citations possible."
+  },
+  {
+    "objectID": "slides.html#get-the-documents",
+    "href": "slides.html#get-the-documents",
+    "title": "Open Models for Civic Good",
+    "section": "Get the documents",
+    "text": "Get the documents\n\nDownload 3–10 recent minutes or agendas into docs/\nExample: City of Oakwood, Ohio council minutes\n\n\n\n\n\n\n\n\nOakwood’s minutes are scans from an office copier\n\n\npypdf finds 0 characters on every page. Without OCR, the tool answers every question with “I couldn’t find that.”"
+  },
+  {
+    "objectID": "slides.html#ocr-make-scanned-minutes-searchable",
+    "href": "slides.html#ocr-make-scanned-minutes-searchable",
+    "title": "Open Models for Civic Good",
+    "section": "OCR: make scanned minutes searchable",
+    "text": "OCR: make scanned minutes searchable\nbrew install ocrmypdf          # macOS\nsudo apt install ocrmypdf      # Ubuntu / Debian (Windows: use WSL)\n\n\nocr.py\n\ndef ocr_folder(src=\"docs\", dst=\"docs_ocr\"):\n    out_dir = pathlib.Path(dst)\n    out_dir.mkdir(exist_ok=True)\n    for pdf in sorted(pathlib.Path(src).glob(\"*.pdf\")):\n        out = out_dir / pdf.name\n        print(f\"OCR: {pdf.name}\")\n        ocrmypdf.ocr(pdf, out, language=\"eng\", skip_text=True,\n                     deskew=True, rotate_pages=True, progress_bar=False)\n        check(out)\n\ndef check(pdf):\n    \"\"\"Flag pages where OCR found little text, so a person can look at them.\"\"\"\n    for n, page in enumerate(PdfReader(pdf).pages, start=1):\n        if len((page.extract_text() or \"\").strip()) &lt; 200:\n            print(f\"  check {pdf.name} p. {n}\")"
+  },
+  {
+    "objectID": "slides.html#ocr-results-on-the-may-4-2026-minutes",
+    "href": "slides.html#ocr-results-on-the-may-4-2026-minutes",
+    "title": "Open Models for Civic Good",
+    "section": "OCR results on the May 4, 2026 minutes",
+    "text": "OCR results on the May 4, 2026 minutes\n\n\n0 → 4,603\ncharacters on the densest page\n9 pages in about 17 seconds\n\nCheck before you trust it:\n\nRoll-call lines with dot leaders turned to junk, and a council member’s name was misread\n“Pickleball” became “picklebal]”\nPrinted page numbers (386–394) ≠ PDF pages (1–9)\n\nSpot-check names, votes and dollar amounts against the scan.\n\n\n\nFor tougher scans (handwriting, stamps, tables), use an open vision model on just the flagged pages: Gemma 4’s image input at a high token budget, or Ai2’s fully open olmOCR."
+  },
+  {
+    "objectID": "slides.html#ingest.py-chunk-and-embed",
+    "href": "slides.html#ingest.py-chunk-and-embed",
+    "title": "Open Models for Civic Good",
+    "section": "ingest.py: chunk and embed",
+    "text": "ingest.py: chunk and embed\nReads PDF, .txt and .md. Every chunk keeps a location to cite.\ndef chunks_from_pdf(path):\n    reader = PdfReader(path)\n    for page_num, page in enumerate(reader.pages, start=1):\n        text = \" \".join((page.extract_text() or \"\").split())\n        for i in range(0, len(text), CHUNK_CHARS):\n            piece = text[i:i + CHUNK_CHARS]\n            if len(piece) &gt; 50:\n                yield {\"source\": path.name,\n                       \"loc\": f\"p. {page_num}\", \"text\": piece}\n\n# .txt / .md: split at headings and blank lines, tag \"lines 12-30\"\nvectors.extend(ollama.embed(\n    model=\"nomic-embed-text\",\n    input=[f\"search_document: {c['text']}\" for c in batch],\n)[\"embeddings\"])\nuv run python ocr.py && uv run python ingest.py docs_ocr"
+  },
+  {
+    "objectID": "slides.html#ask.py-the-prompt-does-the-civic-work",
+    "href": "slides.html#ask.py-the-prompt-does-the-civic-work",
+    "title": "Open Models for Civic Good",
+    "section": "ask.py: the prompt does the civic work",
+    "text": "ask.py: the prompt does the civic work\nSYSTEM = \"\"\"You help residents understand their local government.\nUse ONLY the excerpts provided. Do not use outside knowledge.\nWrite in plain language at about an 8th-grade reading level.\nAfter each fact, cite its excerpt exactly as labeled,\nlike [minutes.pdf, p. 4] or [notes.md, lines 12-30].\nIf the excerpts do not answer the question, say:\n\"I couldn't find that in these records.\"\nThen suggest contacting the city clerk.\nNever guess names, dates, dollar amounts, or vote counts.\"\"\""
+  },
+  {
+    "objectID": "slides.html#ask.py-retrieve-then-stream-the-answer",
+    "href": "slides.html#ask.py-retrieve-then-stream-the-answer",
+    "title": "Open Models for Civic Good",
+    "section": "ask.py: retrieve, then stream the answer",
+    "text": "ask.py: retrieve, then stream the answer\ndef stream_answer(question):\n    hits = retrieve(question)              # 5 closest chunks\n    context = \"\\n\\n\".join(\n        f\"Excerpt [{h['source']}, {h['loc']}]:\\n{h['text']}\"\n        for h in hits)\n    stream = client.chat(\n        model=\"gemma4:e4b\",\n        messages=[system_msg, user_msg(context, question)],\n        think=False,       # skip Gemma 4's silent \"thinking\" pass\n        stream=True,       # print words as they arrive\n        keep_alive=\"30m\",\n        options={\"temperature\": 0.2, \"num_predict\": 600})\n    for part in stream:\n        yield part[\"message\"][\"content\"]"
+  },
+  {
+    "objectID": "slides.html#ask.py-just-hangs",
+    "href": "slides.html#ask.py-just-hangs",
+    "title": "Open Models for Civic Good",
+    "section": "“ask.py just hangs”",
+    "text": "“ask.py just hangs”\nGemma 4 is a reasoning model. By default it may think silently for minutes on a laptop CPU, with nothing on screen.\n\n\n\nFix\nWhy\n\n\n\n\nthink=False\nSkip the hidden reasoning pass\n\n\nstream=True\nWords appear as they’re written\n\n\nnum_predict: 600\nCap runaway answers\n\n\nClient(timeout=300)\nGive up instead of hanging forever\n\n\ncheck_setup()\nClear error if Ollama or a model is missing\n\n\n\nStill slow? Run ollama ps. “100% CPU” → switch to gemma4:e2b. The first question is always slower while the model loads."
+  },
+  {
+    "objectID": "slides.html#app.py-a-page-residents-can-use",
+    "href": "slides.html#app.py-a-page-residents-can-use",
+    "title": "Open Models for Civic Good",
+    "section": "app.py: a page residents can use",
+    "text": "app.py: a page residents can use\nimport gradio as gr\nfrom ask import check_setup, stream_answer\n\ndef respond(message, history):\n    text = \"\"\n    for piece in stream_answer(message):\n        text += piece\n        yield text                     # stream into the chat\n\ndemo = gr.ChatInterface(\n    fn=respond,\n    title=\"Ask Your City Council\",\n    description=\"Answers come only from published records, \"\n                \"with citations.\",\n)\ncheck_setup()\ndemo.launch()"
+  },
+  {
+    "objectID": "slides.html#test-it-before-you-demo",
+    "href": "slides.html#test-it-before-you-demo",
+    "title": "Open Models for Civic Good",
+    "section": "Test it before you demo",
+    "text": "Test it before you demo\n\nWrite 5 questions you know the answers to\nAdd 2 questions the documents can’t answer\nEvery answer cites a real page?\nUnanswerable ones get “I couldn’t find that”?\n\nInventing facts? Lower TOP_K, tighten the prompt, or move up to gemma4:12b."
+  },
+  {
+    "objectID": "slides.html#trends.py-311-requests-vs.-budget",
+    "href": "slides.html#trends.py-311-requests-vs.-budget",
+    "title": "Open Models for Civic Good",
+    "section": "trends.py: 311 requests vs. budget",
+    "text": "trends.py: 311 requests vs. budget\nPandas does the math. The model only explains the table.\ndef demand_vs_budget(csv_311, csv_budget, categories=None):\n    counts = requests_by_year(csv_311, categories)\n    budget = pd.read_csv(csv_budget)\n    out = counts.merge(budget, on=[\"year\", \"category\"], how=\"left\")\n    g = out.sort_values([\"category\", \"year\"]).groupby(\"category\")\n    out[\"requests_change_pct\"] = g[\"requests\"].pct_change() * 100\n    out[\"budget_change_pct\"] = g[\"budget_usd\"].pct_change() * 100\n    out[\"usd_per_request\"] = out[\"budget_usd\"] / out[\"requests\"]\n    return out\n\n\n\nyear\ncategory\nrequests\nbudget\nrequests Δ\n$ per request\n\n\n\n\n2024\nPothole\n476\n$500,000\n+24.3%\n$1,050\n\n\n2025\nPothole\n639\n$520,000\n+34.2%\n$814\n\n\n\nSample data. Compare full years; a new 311 app can raise counts without more need on the street."
+  },
+  {
+    "objectID": "slides.html#the-question",
+    "href": "slides.html#the-question",
+    "title": "Open Models for Civic Good",
+    "section": "The question",
+    "text": "The question\n\n“What are the trends for potholes, trash and other complaints, and what is the top complaint?”\n\nData: Dayton’s Calls for Service dataset · 25,824 police calls, Aug 6 – Oct 4, 2026\n\nHow AI helped:\n\nRead the file first: police dispatches, not 311, so no pothole category exists\nCode did the counting, not the model’s memory\nFair comparisons: resident calls only, two full four-week windows\nPlain-language results with the caveats a council member needs"
+  },
+  {
+    "objectID": "slides.html#what-it-found",
+    "href": "slides.html#what-it-found",
+    "title": "Open Models for Civic Good",
+    "section": "What it found",
+    "text": "What it found\n\n\nTop complaint\n1,747\nwelfare-check calls from residents (about 8%)\nTotal resident calls held flat: 10,088 vs. 9,883\n\n\n\n\nCall type\nAug 9–Sep 5\nSep 6–Oct 3\nChange\n\n\n\n\nWelfare check\n811\n862\n+6%\n\n\nMissing person\n309\n404\n+31%\n\n\nAlarm complaint\n443\n381\n−14%\n\n\nParking complaint\n212\n218\n+3%\n\n\nLoud noise\n180\n197\n+9%\n\n\nAbandoned vehicle\n90\n95\n+6%\n\n\nDumping or littering\n21\n18\n−14%\n\n\nTree down\n40\n3\n−92%"
+  },
+  {
+    "objectID": "slides.html#what-the-data-cant-tell-you",
+    "href": "slides.html#what-the-data-cant-tell-you",
+    "title": "Open Models for Civic Good",
+    "section": "What the data can’t tell you",
+    "text": "What the data can’t tell you\n\nPotholes: not here. Residents report them to the city, not police.\nTrash: ~5 dumping calls a week is too few for a trend.\nBudget renewal: 8 weeks can’t show year-over-year growth.\nBig swings need a reason: the tree-down drop may be one August storm.\n\n\nDayton’s service-request data: residents report potholes and dumping through Dayton Delivers or daytonohio.gov (937-333-3333). Look on the Dayton Transparency Portal; if it isn’t published, file a public records request for 2+ years."
+  },
+  {
+    "objectID": "slides.html#more-civic-projects-for-a-hack-day",
+    "href": "slides.html#more-civic-projects-for-a-hack-day",
+    "title": "Open Models for Civic Good",
+    "section": "More civic projects for a Hack Day",
+    "text": "More civic projects for a Hack Day\n\n\n\n\n\n\n\n\nProject\nWho it helps\nOpen-model angle\n\n\n\n\nMeeting-audio summarizer\nResidents who miss evening meetings\nGemma 4 E2B/E4B take audio input\n\n\nScanned-records reader\nClerks, researchers\nGemma 4 vision or olmOCR\n\n\nMultilingual notices\nNon-English-speaking households\nQwen; native-speaker review\n\n\n311 request router\nCity staff\nClassify complaints on city machines\n\n\nBenefits explainer\nPeople applying for aid\nRAG over program rules, with citations\n\n\nBudget explorer\nJournalists, advocates\n“How much went to parks?” with page cites\n\n\nAlt-text helper\nBlind and low-vision residents\nDraft descriptions for human approval"
+  },
+  {
+    "objectID": "slides.html#responsible-civic-ai-checklist",
+    "href": "slides.html#responsible-civic-ai-checklist",
+    "title": "Open Models for Civic Good",
+    "section": "Responsible civic AI checklist",
+    "text": "Responsible civic AI checklist\n\n\n\nCite or stay silent\nLabel it as AI, not an official service\nKeep personal data local\nPublic records only\nWrite plainly (8th-grade level)\n\n\n\nAccessible UI (keyboard, contrast, screen readers)\nTest for uneven quality across neighborhoods and languages\nHuman review for translations and alt text\nCheck licenses: model, data, yours\nDocument limits in the README\n\n\n\nA wrong answer about a tax deadline or a benefit rule can cost someone real money."
+  },
+  {
+    "objectID": "slides.html#ship-it-and-share-it",
+    "href": "slides.html#ship-it-and-share-it",
+    "title": "Open Models for Civic Good",
+    "section": "Ship it and share it",
+    "text": "Ship it and share it\nAt a Hack Day\n\nPublic repo, open-source license, README with setup, model and known limits\n2-minute demo: one cited answer, one honest “I couldn’t find that”\nSubmit on your Fest’s event page before the deadline\n\nOnline: write it up on DEV and enter the Hacktoberfest DEV Challenges\nContributing: browse github.com/topics/civic-tech; only open PRs you’ve run and tested, and say if AI helped."
+  },
+  {
+    "objectID": "slides.html#thank-you",
+    "href": "slides.html#thank-you",
+    "title": "Open Models for Civic Good",
+    "section": "Thank you",
+    "text": "Thank you\n\n\n\nCode: civic-qa.zip · ocr.py · ingest.py · ask.py · app.py · trends.py · dayton_calls.py\nHacktoberfest FAQ · Ollama · Gemma 4 on Ollama · Olmo 3 · Dayton Transparency Portal\n\n\n\n\nOpen Models for Civic Good · Hacktoberfest 2026"
+  }
+]
