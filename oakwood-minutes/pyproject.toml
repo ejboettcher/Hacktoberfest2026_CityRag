@@ -1,0 +1,22 @@
+[project]
+name = "oakwood-minutes"
+version = "0.2.0"
+description = "Ask Oakwood City Council (decision-first RAG proof of concept): BM25 recall + clef-flash rerank/gate + Gemma 4 answers with page citations."
+license = "Apache-2.0"
+requires-python = ">=3.11"
+dependencies = [
+    "ollama>=0.6", # local models: chat + /v1/systemone decision endpoint (ask.py)
+    "pypdf>=6.0", # read text from PDFs (ingest.py, ocr.py)
+    "rank-bm25>=0.2", # BM25 lexical index; replaces the embedding model + vector store
+    "gradio>=6.0", # resident-facing web UI (app.py)
+    "pandas>=3.0", # 311 / budget / calls-for-service analysis
+    "ocrmypdf>=17.0", # OCR for scanned minutes; also needs Tesseract + Ghostscript installed
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.6",
+]
+
+[tool.uv]
+package = false

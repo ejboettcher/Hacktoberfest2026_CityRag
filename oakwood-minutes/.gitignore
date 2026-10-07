@@ -1,0 +1,7 @@
+*.json
+*.pyc
+*.pkl
+__pycache__/
+.venv/
+.ruff_cache/
+docs_ocr/
